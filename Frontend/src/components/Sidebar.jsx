@@ -39,8 +39,8 @@ export default function Sidebar({ page, setPage, onLogout }) {
       <nav className="sb-nav">
         {NAV.map(({ id, label, icon: Icon }) => (
           <button key={id} id={`nav-${id}`}
-            className={`nav-item ${page === id || (id === 'send' && page === 'dashboard') ? 'active' : ''}`}
-            onClick={() => id === 'send' ? setPage('dashboard') : setPage(id)}>
+            className={`nav-item ${page === id ? 'active' : ''}`}
+            onClick={() => setPage(id)}>
             <Icon size={17} />
             {label}
           </button>

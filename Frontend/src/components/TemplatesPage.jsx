@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import toast from 'react-hot-toast';
 import { getBodies, createBody, updateBody, deleteBody } from '../api/api';
 import { Plus, Pencil, Trash2, Eye, X } from 'lucide-react';
 
 function PreviewModal({ body, onClose }) {
-  return (
+  return createPortal(
     <div className="overlay" onClick={onClose}>
       <div className="modal modal-lg" onClick={e => e.stopPropagation()}>
         <div className="modal-h"><h3>📧 {body.title}</h3><button className="modal-x" onClick={onClose}><X size={15}/></button></div>
         <div className="modal-b"><div className="preview-body">{body.content}</div></div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 
@@ -33,7 +35,7 @@ function BodyModal({ initial, onSave, onClose }) {
       toast.success(isEdit ? 'Updated!' : 'Created!'); onSave(res.data);
     } catch { toast.error('Save failed'); } finally { setLoading(false); }
   };
-  return (
+  return createPortal(
     <div className="overlay" onClick={onClose}>
       <div className="modal modal-lg" onClick={e => e.stopPropagation()}>
         <div className="modal-h"><h3>{isEdit ? '✏️ Edit Template' : '➕ New Template'}</h3><button className="modal-x" onClick={onClose}><X size={15}/></button></div>
@@ -65,7 +67,8 @@ function BodyModal({ initial, onSave, onClose }) {
           </form>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 
