@@ -24,9 +24,11 @@ const COLORS = ['#4f46e5','#7c3aed','#db2777','#059669','#d97706','#2563eb'];
 export function getColor(str = '') { return COLORS[str.charCodeAt(0) % COLORS.length]; }
 export function initials(name = '') { return name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2) || '?'; }
 
-export default function Sidebar({ page, setPage, onLogout }) {
+export default function Sidebar({ page, setPage, onLogout, isOpen, onClose }) {
   return (
-    <aside className="sb">
+    <>
+      {isOpen && <div className="sb-overlay" onClick={onClose}></div>}
+      <aside className={`sb ${isOpen ? 'open' : ''}`}>
       <div className="sb-top">
         <div className="sb-logo" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: 12 }}>
           <img src="/joblith-logo.png" alt="Joblith AI" style={{ height: 65, objectFit: 'contain' }} />
@@ -61,5 +63,6 @@ export default function Sidebar({ page, setPage, onLogout }) {
         <svg style={{ marginLeft: 'auto', color: '#9ca3af' }} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="6 9 12 15 18 9"/></svg>
       </div>
     </aside>
+    </>
   );
 }

@@ -222,7 +222,7 @@ export default function DashboardPage({ refresh, onRefresh, setPage }) {
   return (
     <div>
       {/* ── Stats ── */}
-      <div className="stats-row">
+      <div className="stats-row fade stagger-1">
         {[
           { label: 'Total Sent', val: stats?.totalSent ?? '—', sub: 'All time emails sent', cls: 'blue', ico: '📨' },
           { label: 'Pending', val: stats?.pendingJobs ?? '—', sub: 'Scheduled emails', cls: 'green', ico: '📤' },
@@ -241,7 +241,7 @@ export default function DashboardPage({ refresh, onRefresh, setPage }) {
       </div>
 
       {/* ── 3-Col: Recipients | Subjects | Templates ── */}
-      <div className="grid-3">
+      <div className="grid-3 fade stagger-2">
 
         {/* Recipients */}
         <div className="card card-p">
@@ -297,7 +297,7 @@ export default function DashboardPage({ refresh, onRefresh, setPage }) {
       </div>
 
       {/* ── Send Campaign ── */}
-      <div className="campaign-section">
+      <div className="campaign-section fade stagger-3">
         <div className="campaign-header">
           <div className="ch-icon"><Send size={18} /></div>
           <div>
@@ -376,8 +376,19 @@ export default function DashboardPage({ refresh, onRefresh, setPage }) {
         </div>
       </div>
 
+      {/* ── Tracking Summary ── */}
+      <div className="card card-p fade stagger-3" style={{ marginBottom: 32, display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'linear-gradient(135deg, #1e293b, #0f172a)', color: '#fff' }}>
+        <div>
+          <h3 style={{ fontSize: 18, fontWeight: 800, marginBottom: 8, color: '#fff' }}>Email Open Tracking</h3>
+          <p style={{ fontSize: 13.5, color: '#94a3b8' }}>Check if your emails were opened or replied to in real-time.</p>
+        </div>
+        <button className="btn" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', border: '1px solid rgba(255,255,255,0.2)' }} onClick={() => setPage('tracking')}>
+          <Eye size={16} /> View Tracking Stats
+        </button>
+      </div>
+
       {/* ── Recent Campaigns / Logs ── */}
-      <div className="card card-p">
+      <div className="card card-p fade stagger-4">
         <div className="card-hd">
           <h3>📋 Recent Campaigns</h3>
           <button className="view-all" onClick={() => setPage('history')}>View all</button>

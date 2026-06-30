@@ -25,6 +25,7 @@ const PAGE_TITLES = {
 export default function App() {
   const [authed, setAuthed] = useState(() => !!localStorage.getItem('joblith_auth'));
   const [page, setPage] = useState('dashboard');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [refresh, setRefresh] = useState(0);
   const onRefresh = () => setRefresh(k => k + 1);
 
@@ -66,13 +67,16 @@ export default function App() {
         style: { background: '#fff', color: '#111827', border: '1px solid #e5e7eb', borderRadius: '10px', fontSize: '13.5px' },
         success: { iconTheme: { primary: '#4f46e5', secondary: '#fff' } },
       }} />
-      <Sidebar page={page} setPage={setPage} onLogout={handleLogout} />
+      <Sidebar page={page} setPage={(p) => { setPage(p); setSidebarOpen(false); }} onLogout={handleLogout} isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       <div className="main">
         <header className="topbar">
           <div className="topbar-left">
-            <button style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#6b7280', padding: 4 }}>
+            <button className="tb-menu-btn" onClick={() => setSidebarOpen(true)}>
               <Menu size={20} />
             </button>
+            <div className="tb-mobile-logo">
+              <h2 style={{ fontSize: 16, fontWeight: 800, margin: 0, background: 'linear-gradient(135deg, #1e293b, #4f46e5)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Joblith AI</h2>
+            </div>
           </div>
           <div className="topbar-right">
             <button className="tb-icon-btn"><Sun size={18} /></button>
